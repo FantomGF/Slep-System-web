@@ -1,0 +1,170 @@
+/* Глобальное правило для предсказуемого расчёта размеров */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+/* Фоновая обёртка */
+.bodystyle {
+  background-image: url(back.png);
+  background-color: #6A0DAD;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/* Грид-оболочка с областями: header, menu, contents и footer */
+.bodywrapper-grid {
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "header header"
+    "menu contents"
+    "footer footer";
+  gap: 10px;
+}
+
+/* Шапка сайта */
+.header {
+  grid-area: header;
+  text-align: center;
+  background-color: rgba(74, 43, 82, 0.9);
+  border-radius: 15px;
+  padding: 20px;
+  color: gainsboro;
+  transition: background-color 0.3s ease;
+}
+
+/* Футер */
+.footer {
+  grid-area: footer;
+  text-align: center;
+  background-color: rgba(74, 43, 82, 0.9);
+  border-radius: 15px;
+  padding: 20px;
+  color: gainsboro;
+  transition: background-color 0.3s ease;
+}
+
+/* Меню — левая колонка */
+.menu {
+  grid-area: menu;
+  padding: 20px;
+  background-color: rgba(74, 43, 82, 0.9);
+  border-radius: 15px;
+  overflow-y: auto;
+  /* Ограничиваем высоту меню */
+  max-height: 400px;
+}
+
+/* Контент — правая колонка */
+.contents {
+  grid-area: contents;
+  display: grid;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: rgba(74, 43, 82, 0.8);
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Ограничиваем высоту контента */
+  max-height: 400px;
+}
+
+/* Единый стиль скроллбара для меню и контента */
+.menu::-webkit-scrollbar,
+.contents::-webkit-scrollbar {
+  width: 10px;
+}
+.menu::-webkit-scrollbar-track,
+.contents::-webkit-scrollbar-track {
+  background: rgba(74, 43, 82, 0.5);
+  border-radius: 15px;
+}
+.menu::-webkit-scrollbar-thumb,
+.contents::-webkit-scrollbar-thumb {
+  background: rgb(255, 204, 255);
+  border-radius: 15px;
+}
+
+/* Стили для кнопок меню */
+.menu-item button {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1/1;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+#alarm { background-image: url(alarm.png); }
+#food  { background-image: url(food.png); }
+#star  { background-image: url(star.png); }
+#light  { background-image: url(moon.png); }
+#zzz   { background-image: url(zzz.png); }
+#watch { background-image: url(watch.png); }
+
+/* Стили для каждого элемента меню */
+.menu-item {
+  padding: 20px;
+  font-size: 1.25rem;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+.menu-item:hover {
+  background-color: rgba(74, 43, 82, 0.8);
+  border-bottom: 2px solid red;
+  color: white;
+}
+
+/* Стили для изображений-наклеек */
+.sticker-img {
+  display: flex;
+  margin: 15px auto;
+  padding: 10px;
+  width: 60%;
+  height: auto;
+}
+
+/* Текстовые стили */
+.text1 {
+  font-size: calc(24px + 16 * (100vw / 1280));
+  display: block;
+  width: fit-content;
+  margin: 10px auto;
+  padding: 10px;
+  color: gainsboro;
+}
+
+/* Адаптивные медиазапросы */
+@media (max-width: 768px) {
+  .bodywrapper-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "header"
+      "menu"
+      "contents"
+      "footer";
+  }
+}
+@media (max-width: 480px) {
+  .text1 {
+    font-size: 1.5rem;
+  }
+  .menu-item {
+    padding: 15px;
+  }
+}
