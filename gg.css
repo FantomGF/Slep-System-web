@@ -25,8 +25,8 @@ body {
   width: 90%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 20% 80%;
-  grid-template-rows: auto auto auto;
+  grid-template-columns: 25% 75%;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "header header"
     "menu contents"
@@ -63,27 +63,24 @@ body {
   background-color: rgba(74, 43, 82, 0.9);
   border-radius: 15px;
   overflow-y: auto;
-  /* Ограничиваем высоту меню */
-  max-height: 400px;
+  max-height: 500px;
 }
 
 /* Контент — правая колонка */
 .contents {
   grid-area: contents;
-  display: grid;
   padding: 20px;
   border-radius: 15px;
   background-color: rgba(74, 43, 82, 0.8);
   overflow-y: auto;
   overflow-x: hidden;
-  /* Ограничиваем высоту контента */
-  max-height: 400px;
+  max-height: 500px;
 }
 
 /* Единый стиль скроллбара для меню и контента */
 .menu::-webkit-scrollbar,
 .contents::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 .menu::-webkit-scrollbar-track,
 .contents::-webkit-scrollbar-track {
@@ -100,7 +97,7 @@ body {
 .menu-item button {
   display: block;
   width: 100%;
-  aspect-ratio: 1/1;
+  height: 60px; /* Размер по умолчанию */
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -108,19 +105,28 @@ body {
   cursor: pointer;
   background-color: transparent;
 }
+
+/* Увеличение кнопок на больших экранах */
+@media (min-width: 1024px) {
+  .menu-item button {
+    height: 100px; /* Увеличенный размер */
+    background-size: 80%; /* Растяжение фона для ПК */
+  }
+}
+
 #alarm { background-image: url(alarm.png); }
 #food  { background-image: url(food.png); }
 #star  { background-image: url(star.png); }
-#light  { background-image: url(moon.png); }
+#light { background-image: url(moon.png); }
 #zzz   { background-image: url(zzz.png); }
 #watch { background-image: url(watch.png); }
 
 /* Стили для каждого элемента меню */
 .menu-item {
-  padding: 20px;
+  padding: 10px;
   font-size: 1.25rem;
   border-radius: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   transition: background-color 0.3s ease;
 }
 .menu-item:hover {
@@ -129,18 +135,18 @@ body {
   color: white;
 }
 
-/* Стили для изображений-наклеек */
+/* Стили для изображений */
 .sticker-img {
   display: flex;
   margin: 15px auto;
   padding: 10px;
-  width: 60%;
+  width: 80%;
   height: auto;
 }
 
 /* Текстовые стили */
 .text1 {
-  font-size: calc(24px + 16 * (100vw / 1280));
+  font-size: calc(20px + 10 * (100vw / 1280));
   display: block;
   width: fit-content;
   margin: 10px auto;
@@ -159,12 +165,24 @@ body {
       "contents"
       "footer";
   }
+
+  .menu, .contents {
+    max-height: 300px;
+  }
+
+  .text1 {
+    font-size: 1.2rem;
+  }
+
+  .menu-item button {
+    height: 50px;
+  }
 }
 @media (max-width: 480px) {
   .text1 {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   .menu-item {
-    padding: 15px;
+    padding: 12px;
   }
 }
