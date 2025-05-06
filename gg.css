@@ -97,9 +97,9 @@ body {
 .menu-item button {
   display: block;
   width: 100%;
-  height: 8vh; /* Теперь кнопки будут динамически изменять высоту */
+  height: 8vh; /* Динамическое изменение высоты */
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: contain; /* По умолчанию сохраняем пропорции */
   background-position: center;
   border: none;
   cursor: pointer;
@@ -110,10 +110,36 @@ body {
 @media (min-width: 1024px) {
   .menu-item button {
     height: 12vh; /* Автоматическое увеличение на больших экранах */
-    background-size: 80%;
+    background-size: 90%;
   }
 }
 
+/* Адаптация на мобильных */
+@media (max-width: 768px) {
+  .bodywrapper-grid {
+    grid-template-columns: 20% 80%; /* Уменьшаем меню, увеличиваем контент */
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "header header"
+      "menu contents"
+      "footer footer";
+  }
+
+  .menu {
+    max-height: 250px; /* Ограничиваем высоту */
+  }
+
+  .contents {
+    max-height: 500px; /* Даем больше места контенту */
+  }
+
+  .menu-item button {
+    height: 7vh;
+    background-size: 80%; /* Чуть меньше на телефонах */
+  }
+}
+
+/* Подключение изображений к кнопкам */
 #alarm { background-image: url(alarm.png); }
 #food  { background-image: url(food.png); }
 #star  { background-image: url(star.png); }
@@ -155,29 +181,6 @@ body {
 }
 
 /* Адаптивные медиазапросы */
-@media (max-width: 768px) {
-  .bodywrapper-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto;
-    grid-template-areas:
-      "header"
-      "menu"
-      "contents"
-      "footer";
-  }
-
-  .menu, .contents {
-    max-height: 300px;
-  }
-
-  .text1 {
-    font-size: 1.2rem;
-  }
-
-  .menu-item button {
-    height: 50px;
-  }
-}
 @media (max-width: 480px) {
   .text1 {
     font-size: 1rem;
