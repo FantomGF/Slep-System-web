@@ -1,10 +1,10 @@
 // Ждем загрузки DOM
 document.addEventListener("DOMContentLoaded", function () {
-  // Получаем ссылки на основные элементы: блок содержимого и нижний блок (footer) для отображения времени
+  // Получаем ссылки на основные элементы
   const contents = document.querySelector(".contents");
   const footer = document.querySelector(".footer");
 
-  // Функция обновления текущего времени в нижнем блоке
+  // Функция обновления текущего времени в футере
   function updateFooterClock() {
     const currentTime = new Date().toLocaleTimeString();
     footer.innerHTML = `<h2 class="text1">Текущее время</h2><p class="text1">${currentTime}</p>`;
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <p class="text1">
         Глубокий сон, или медленноволновой (Slow Wave Sleep, SWS), получил своё название благодаря преобладанию длинных дельта-волнов, зафиксированных при электроэнцефалографии в стадии 3 сна.
       </p>
-        <img src="sws.jpg" alt="Глубокий сон" class="text1" style="display: block; margin: 10px auto; max-width: 100%;">
+        <img src="sws.png" alt="Глубокий сон" class="text1" style="display: block; margin: 10px auto; max-width: 100%;">
       <p class="text1">
         В этой фазе организм временно прекращает реагировать на внешние стимулы, что позволяет сосредоточиться на самовосстановлении. Медленноволновой сон обеспечивает критически важные функции для иммунитета, кроветворения, микрофлоры кишечника, секреции гормона роста, обмена веществ, регуляции инсулина и консолидации памяти.
       </p>
@@ -126,32 +126,144 @@ document.addEventListener("DOMContentLoaded", function () {
         Для повышения продуктивности и улучшения ментального здоровья рекомендуется плавная коррекция режима сна, поскольку резкие изменения могут вызвать стресс.
       </p>
       <img src="circadian.png" alt="Циркадные ритмы" class="text1" style="display: block; margin: 10px auto; max-width: 100%;">
-    `
+    `,
+    // 🔹 Калькулятор качества сна
+   calc: `
+     <h2 class="text1">Калькулятор качества сна</h2>
+     <form id="sleepForm">
+         <div class="question">
+             <label>Во сколько ты обычно ложишься спать?</label><br>
+             <input type="radio" name="sleepTime" value="10"> До 22:00<br>
+             <input type="radio" name="sleepTime" value="7"> 22:00 – 00:00<br>
+             <input type="radio" name="sleepTime" value="4"> После 00:00
+         </div>
+         <div class="question">
+             <label>Как часто ты просыпаешься среди ночи?</label><br>
+             <input type="radio" name="wakeUp" value="10"> Никогда<br>
+             <input type="radio" name="wakeUp" value="7"> 1–2 раза<br>
+             <input type="radio" name="wakeUp" value="4"> Часто
+         </div>
+         <div class="question">
+             <label>Как ты себя чувствуешь утром после пробуждения?</label><br>
+             <input type="radio" name="morningFeel" value="10"> Полон энергии<br>
+             <input type="radio" name="morningFeel" value="7"> Нормально<br>
+             <input type="radio" name="morningFeel" value="4"> Уставший
+         </div>
+         <div class="question">
+             <label>Насколько регулярно ты ложишься спать?</label><br>
+             <input type="radio" name="sleepRegularity" value="10"> Всегда в одно и то же время<br>
+             <input type="radio" name="sleepRegularity" value="7"> Примерно в одно и то же время<br>
+             <input type="radio" name="sleepRegularity" value="4"> Каждый раз по-разному
+         </div>
+         <div class="question">
+             <label>Использование гаджетов перед сном?</label><br>
+             <input type="radio" name="gadgets" value="10"> Не использую<br>
+             <input type="radio" name="gadgets" value="9"> 15–30 минут до сна<br>
+             <input type="radio" name="gadgets" value="7"> 10–15 минут до сна<br>
+             <input type="radio" name="gadgets" value="4"> Прямо перед сном
+         </div>
+         <div class="question">
+             <label>Спишь ли ты днём, и как долго?</label><br>
+             <input type="radio" name="napTime" value="10"> Не сплю днём или менее 40 минут<br>
+             <input type="radio" name="napTime" value="7"> 40–60 минут<br>
+             <input type="radio" name="napTime" value="4"> Более 60 минут
+         </div>
+         <button type="button" onclick="sleepqualitycalc()">Рассчитать качество сна</button>
+         <div class="result" id="sleepResult"></div>
+     </form>
+   `,
+  };
+
+
+  // 🔹 Функция расчёта качества сна (доступна глобально)
+  window.sleepqualitycalc = function () {
+    let totalScore = 0;
+    const form = document.getElementById("sleepForm");
+    const inputs = form.querySelectorAll("input[type='radio']:checked");
+
+    inputs.forEach(input => {
+      totalScore += parseInt(input.value, 10);
+    });
+
+    let resultText = "";
+    if (totalScore >= 80) {
+      resultText = "🌟 Отличное качество сна!";
+    } else if (totalScore >= 60) {
+      resultText = "😊 Хороший, но можно улучшить.";
+    } else {
+      resultText = "⚠️ Средний уровень, есть проблемы.";
+    }
+
+    document.getElementById("sleepResult").innerText = `Твой итоговый балл: ${totalScore}. ${resultText}`;
   };
 
   // Привязываем обработчики событий для кнопок меню
-  document.getElementById("alarm").addEventListener("click", function () {
-    contents.innerHTML = contentTexts.alarm;
-  });
+  // Привязываем обработчики событий для кнопок меню
+   document.getElementById("alarm").addEventListener("click", function () {
+     contents.innerHTML = contentTexts.alarm;
+   });
+   document.getElementById("food").addEventListener("click", function () {
+     contents.innerHTML = contentTexts.food;
+   });
+   document.getElementById("star").addEventListener("click", function () {
+     contents.innerHTML = contentTexts.star;
+   });
+   document.getElementById("light").addEventListener("click", function () {
+     contents.innerHTML = contentTexts.light;
+   });
+   document.getElementById("zzz").addEventListener("click", function () {
+     contents.innerHTML = contentTexts.zzz;
+   });
+   document.getElementById("watch").addEventListener("click", function () {
+     contents.innerHTML = contentTexts.watch;
+   });
+   document.getElementById("calc").addEventListener("click", function () {
+     contents.innerHTML = contentTexts.calc;
+   });
 
-  document.getElementById("food").addEventListener("click", function () {
-    contents.innerHTML = contentTexts.food;
-  });
+   // 🔹 Калькулятор времени отхода ко сну
+   document.getElementById("gosleep").addEventListener("click", function () {
+     contents.innerHTML = `
+       <h2 class="text1">Калькулятор времени отхода ко сну</h2>
+       <p class="text1">Введите время, когда вам нужно проснуться:</p>
+       <input type="time" id="wakeTime">
+       <p class="text1">Сколько минут занимает засыпание?</p>
+       <input type="number" id="fallAsleepTime" min="0" max="60" value="15">
+       <button id="calculateSleep">Рассчитать</button>
+       <p id="result" class="text1"></p>
+     `;
 
-  document.getElementById("star").addEventListener("click", function () {
-    contents.innerHTML = contentTexts.star;
-  });
+     // Обработчик для расчета времени сна
+     document.getElementById("calculateSleep").addEventListener("click", function () {
+       let wakeTimeInput = document.getElementById("wakeTime").value;
+       let fallAsleepMinutes = parseInt(document.getElementById("fallAsleepTime").value) || 15;
 
-  // Обработчик для переименованного блока "Свет" (ранее "Луна")
-  document.getElementById("light").addEventListener("click", function () {
-    contents.innerHTML = contentTexts.light;
-  });
+       if (!wakeTimeInput) {
+         document.getElementById("result").innerText = "Пожалуйста, укажите время пробуждения.";
+         return;
+       }
 
-  document.getElementById("zzz").addEventListener("click", function () {
-    contents.innerHTML = contentTexts.zzz;
-  });
+       let wakeTime = new Date();
+       let [hours, minutes] = wakeTimeInput.split(":").map(Number);
+       wakeTime.setHours(hours);
+       wakeTime.setMinutes(minutes);
+       wakeTime.setSeconds(0);
 
-  document.getElementById("watch").addEventListener("click", function () {
-    contents.innerHTML = contentTexts.watch;
-  });
-});
+       let sleepCycles = [6, 5, 4]; // Циклы сна от 4 до 9
+       let optimalSleepTimes = [];
+
+       sleepCycles.forEach(cycles => {
+         let sleepTime = new Date(wakeTime.getTime() - cycles * 90 * 60 * 1000 - fallAsleepMinutes * 60 * 1000);
+         let sleepHours = sleepTime.getHours().toString().padStart(2, "0");
+         let sleepMinutes = sleepTime.getMinutes().toString().padStart(2, "0");
+         optimalSleepTimes.push(`${sleepHours}:${sleepMinutes}`);
+       });
+
+       document.getElementById("result").innerHTML = `
+         Вам лучше лечь спать в:<br>
+         <strong>${optimalSleepTimes.join(" или ")}</strong>
+       `;
+     });
+   });
+
+ });
