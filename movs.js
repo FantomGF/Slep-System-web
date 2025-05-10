@@ -129,48 +129,72 @@ document.addEventListener("DOMContentLoaded", function () {
     `,
     // 🔹 Калькулятор качества сна
    calc: `
-     <h2 class="text1">Калькулятор качества сна</h2>
-     <form id="sleepForm">
-         <div class="question">
-             <label>Во сколько ты обычно ложишься спать?</label><br>
-             <input type="radio" name="sleepTime" value="10"> До 22:00<br>
-             <input type="radio" name="sleepTime" value="7"> 22:00 – 00:00<br>
-             <input type="radio" name="sleepTime" value="4"> После 00:00
-         </div>
-         <div class="question">
-             <label>Как часто ты просыпаешься среди ночи?</label><br>
-             <input type="radio" name="wakeUp" value="10"> Никогда<br>
-             <input type="radio" name="wakeUp" value="7"> 1–2 раза<br>
-             <input type="radio" name="wakeUp" value="4"> Часто
-         </div>
-         <div class="question">
-             <label>Как ты себя чувствуешь утром после пробуждения?</label><br>
-             <input type="radio" name="morningFeel" value="10"> Полон энергии<br>
-             <input type="radio" name="morningFeel" value="7"> Нормально<br>
-             <input type="radio" name="morningFeel" value="4"> Уставший
-         </div>
-         <div class="question">
-             <label>Насколько регулярно ты ложишься спать?</label><br>
-             <input type="radio" name="sleepRegularity" value="10"> Всегда в одно и то же время<br>
-             <input type="radio" name="sleepRegularity" value="7"> Примерно в одно и то же время<br>
-             <input type="radio" name="sleepRegularity" value="4"> Каждый раз по-разному
-         </div>
-         <div class="question">
-             <label>Использование гаджетов перед сном?</label><br>
-             <input type="radio" name="gadgets" value="10"> Не использую<br>
-             <input type="radio" name="gadgets" value="9"> 15–30 минут до сна<br>
-             <input type="radio" name="gadgets" value="7"> 10–15 минут до сна<br>
-             <input type="radio" name="gadgets" value="4"> Прямо перед сном
-         </div>
-         <div class="question">
-             <label>Спишь ли ты днём, и как долго?</label><br>
-             <input type="radio" name="napTime" value="10"> Не сплю днём или менее 40 минут<br>
-             <input type="radio" name="napTime" value="7"> 40–60 минут<br>
-             <input type="radio" name="napTime" value="4"> Более 60 минут
-         </div>
-         <button type="button" onclick="sleepqualitycalc()">Рассчитать качество сна</button>
-         <div class="result" id="sleepResult"></div>
-     </form>
+   <h2 class="text1">Калькулятор качества сна</h2>
+    <form id="sleepForm">
+        <div class="question">
+            <label>Во сколько ты обычно ложишься спать?</label><br>
+            <input type="radio" name="sleepTime" value="10"> До 22:00 🌟<br>
+            <input type="radio" name="sleepTime" value="7"> 22:00 – 00:00 😊<br>
+            <input type="radio" name="sleepTime" value="4"> После 00:00 ⚠️
+        </div>
+        <div class="question">
+            <label>Как часто ты просыпаешься среди ночи?</label><br>
+            <input type="radio" name="wakeUp" value="10"> Никогда 🌟<br>
+            <input type="radio" name="wakeUp" value="7"> 1–2 раза 😊<br>
+            <input type="radio" name="wakeUp" value="4"> Часто ⚠️
+        </div>
+        <div class="question">
+            <label>Как ты себя чувствуешь утром после пробуждения?</label><br>
+            <input type="radio" name="morningFeel" value="10"> Полон энергии 🌟<br>
+            <input type="radio" name="morningFeel" value="7"> Нормально 😊<br>
+            <input type="radio" name="morningFeel" value="4"> Уставший ⚠️
+        </div>
+        <div class="question">
+            <label>Насколько регулярно ты ложишься спать?</label><br>
+            <input type="radio" name="sleepRegularity" value="10"> Всегда в одно и то же время 🌟<br>
+            <input type="radio" name="sleepRegularity" value="7"> Примерно в одно и то же время 😊<br>
+            <input type="radio" name="sleepRegularity" value="4"> Каждый раз по-разному (разница больше 3 часов) ⚠️
+        </div>
+        <div class="question">
+            <label>Использование гаджетов перед сном?</label><br>
+            <input type="radio" name="gadgets" value="10"> Не использую 🌟<br>
+            <input type="radio" name="gadgets" value="9"> За 15-30 минут до сна 🌟<br>
+            <input type="radio" name="gadgets" value="7"> За 10-15 минут до сна 😊<br>
+            <input type="radio" name="gadgets" value="4"> Прямо перед сном (менее 10 минут) ⚠️
+        </div>
+        <div class="question">
+            <label>Комфорт спальни (свет, температура, шум)?</label><br>
+            <input type="radio" name="roomComfort" value="10"> Тёмная, тихая, прохладная 🌟<br>
+            <input type="radio" name="roomComfort" value="7"> Средний уровень комфорта 😊<br>
+            <input type="radio" name="roomComfort" value="4"> Светло, шумно, жарко ⚠️
+        </div>
+        <div class="question">
+            <label>Физическая активность в течение дня?</label><br>
+            <input type="radio" name="physicalActivity" value="10"> Есть регулярные тренировки 🌟<br>
+            <input type="radio" name="physicalActivity" value="7"> Иногда двигаюсь 😊<br>
+            <input type="radio" name="physicalActivity" value="4"> Нет физической активности ⚠️
+        </div>
+        <div class="question">
+            <label>Частота пробуждений ночью?</label><br>
+            <input type="radio" name="wakeFrequency" value="10"> Вообще не просыпаюсь 🌟<br>
+            <input type="radio" name="wakeFrequency" value="7"> 1-2 раза за ночь 😊<br>
+            <input type="radio" name="wakeFrequency" value="4"> Часто просыпаюсь ⚠️
+        </div>
+        <div class="question">
+            <label>Употребление кофеина или энергетиков перед сном?</label><br>
+            <input type="radio" name="caffeine" value="10"> Не пью вечером 🌟<br>
+            <input type="radio" name="caffeine" value="7"> Пью за 4-6 часов до сна 😊<br>
+            <input type="radio" name="caffeine" value="4"> Пью незадолго до сна ⚠️
+        </div>
+        <div class="question">
+            <label>Спишь ли ты днём, и как долго?</label><br>
+            <input type="radio" name="napTime" value="10"> Не сплю днём или менее 40 минут 🌟<br>
+            <input type="radio" name="napTime" value="7"> 40-60 минут 😊<br>
+            <input type="radio" name="napTime" value="4"> Более 60 минут ⚠️
+        </div>
+        <button type="button" onclick="sleepqualitycalc()">Рассчитать качество сна</button>
+        <div class="result" id="sleepResult"></div>
+    </form>
    `,
   };
 
