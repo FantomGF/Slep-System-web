@@ -212,10 +212,18 @@ document.addEventListener("DOMContentLoaded", function () {
     let resultText = "";
     if (totalScore >= 80) {
       resultText = "🌟 Отличное качество сна!";
-    } else if (totalScore >= 60) {
+    }
+    else if (totalScore >= 60) {
       resultText = "😊 Хороший, но можно улучшить.";
-    } else {
+    }
+    else if (totalScore >= 40) {
       resultText = "⚠️ Средний уровень, есть проблемы.";
+    }
+    else if (totalScore == 0) {
+      resultText = "Тест не пройден, ни один вариант ответа не выбран";
+    }
+    else {
+      resultText = "🔴 Низкий уровень, есть проблемы.";
     }
 
     document.getElementById("sleepResult").innerText = `Твой итоговый балл: ${totalScore}. ${resultText}`;
